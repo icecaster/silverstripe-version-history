@@ -26,8 +26,21 @@ class VersionHistory_Controller extends Controller
             return false;
         }
 
-        Versioned::set_reading_mode("stage");
+        $includeDraft = Config::inst()->get(
+            $model,
+            'version_history_include_draft'
+        );
+
+        if ($includeDraft) {
+            $origStage = Versioned::current_stage();
+            Versioned::reading_stage('Stage');
+        }
+
         $record = $model::get()->byID($id);
+
+        if ($includeDraft) {
+            Versioned::reading_stage($origStage);
+        }
 
         if (!$record) {
             $this->httpError(404);
