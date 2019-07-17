@@ -2,7 +2,6 @@
 
 class VersionHistory_Controller extends Controller
 {
-
     private static $url_handlers = array(
         '$Action/$Model/$ID/$VersionID/$OtherVersionID' => 'handleAction'
     );
@@ -27,6 +26,7 @@ class VersionHistory_Controller extends Controller
             return false;
         }
 
+        Versioned::set_reading_mode("stage");
         $record = $model::get()->byID($id);
 
         if (!$record) {
