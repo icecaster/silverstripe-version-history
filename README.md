@@ -46,6 +46,18 @@ Member:
     - Salt
 ```
 
+### Compare unpublished (Versioned Stage) records
+
+Similar when you want to compare unpublished records, set the `version_history_include_draft` configuration attribute on your DataObject:
+
+```yml
+MyDataObject:
+  extensions:
+    - Versioned("Stage")
+    - VersionHistoryExtension
+  version_history_include_draft: true
+```
+
 ## Maintainer contact
 
 [jonathonmenz.com](http://jonathonmenz.com)
